@@ -4,10 +4,10 @@
  */
 package com.tienda.service;
 
-/**
- *
- * @author sebas
- */
-public class CategoriaService {
-    
+import com.tienda.domain.Categoria;
+import java.util.List;
+
+
+public interface CategoriaService {
+    public List<Categoria> getCategorias(boolean activos);
 }
