@@ -70,32 +70,27 @@
                     </div>
                 </div>
             </div>
+
+
         </section>
 
 
 
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-<!-- 3 Sección para crear los filtros -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- 3 Sección para crear los filtros -->
         <section th:fragment="filtros" class="bg-light">
             <div class="row py-2">
                 <div class="col-md-1"></div>
@@ -152,9 +147,100 @@
                     </form>
                 </div>
             </div>
+
+
+
+
+            <div class="col-md-3">
+                <form method="POST" th:action="@{/pruebas/query3}" 
+                      class="was-validated">
+                    <div class="card success">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="precioInf">[[#{pruebas.precio.inferior}]]</label>
+                                <input type="number" class="form-control" 
+                                       th:value="${precioInf}"
+                                       th:name="precioInf" required="true"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="precioSup">[[#{pruebas.precio.superior}]]</label>
+                                <input type="number" class="form-control" 
+                                       th:value="${precioSup}"
+                                       th:name="precioSup" required="true"/>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-check"></i> [[#{pruebas.nativo}]]
+                            </button>
+                        </div>
+                    </div>
+                    
+                </form>
+              </div>
+            
+            
+            
+             <div class="col-md-6">
+                <form method="POST" th:action="@{/pruebas/queryExistencia}" class="was-validated">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="text-center">Filtro por Existencias</h5>
+                            <div class="mb-3">
+                                <label for="minimo" class="form-label">Existencias Mínimas</label>
+                              <input type="number" id="minimo" class="form-control" th:name="minimo" th:value="${minimo}"  />
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="maximo" class="form-label">Existencias Máximas</label>
+                                <input type="number" id="maximo" class="form-control" th:name="maximo" th:value="${maximo}" />
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </section> 
+        
+   <section th:fragment="productosExistencia" class="bg-light">
+              
+            
 
+  <div class="container" th:if="${productos != null and !productos.empty}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Productos Filtrados por Existencias</h4>
+                            </div>
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">Descripción</th>
+                                        <th class="text-center">Precio</th>
+                                        <th class="text-center">Existencias</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="producto, contador : ${productos}">
+                                        <td class="text-center">[[${contador.count}]]</td>
+                                        <td>[[${producto.descripcion}]]</td>
+                                        <td class="text-end">[[${#numbers.formatDecimal(producto.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</td>
+                                        <td class="text-center">[[${producto.existencias}]]</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+ </div>
 
-
+</section> 
+        
     </body>
 </html>

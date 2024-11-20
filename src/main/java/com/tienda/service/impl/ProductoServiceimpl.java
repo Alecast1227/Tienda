@@ -65,4 +65,11 @@ public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, do
         return productoDao.metodoNativo(precioInf, precioSup);
     }
 
+    
+    @Override
+@Transactional(readOnly = true)
+public List<Producto> findByExistenciasBetweenOrderByDescripcion(int minimo, int maximo) {
+    return productoDao.findByExistenciasBetweenOrderByDescripcion(minimo, maximo);
+}
+
 }
